@@ -34,16 +34,17 @@ function Createone() {
       location: formData.location
     };
     console.log(certinfo); // You can do whatever you need with the certinfo object
-    GenerateCertificate(certinfo);
+    
     const data = new URLSearchParams();
     data.append('channelid', 'mychannel');
     data.append('chaincodeid', 'basic');
     data.append('function', 'createAsset');
-    data.append('args', certinfo.course);
+    // data.append('args', "asset1293231429");
     data.append('args', certinfo.name);
+    data.append('args', certinfo.endorser_name);
+    data.append('args', certinfo.course);
     data.append('args', certinfo.issuer);
     data.append('args', certinfo.issue_date);
-    data.append('args', certinfo.endorser_name);
     data.append('args', certinfo.begin_date);
     data.append('args', certinfo.end_date);
 
@@ -64,6 +65,9 @@ function Createone() {
       .then(data => {
         console.log('API response:', data);
         // Handle API response if needed
+        certinfo.transaction_id = data.transaction_id; // Assuming data is the JSON response
+        console.log('Updated certinfo:', certinfo);
+        GenerateCertificate(certinfo);
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);

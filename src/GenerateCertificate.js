@@ -3,7 +3,7 @@ import jsPDF from 'jspdf';
 import QRCode from 'qrcode'; // Import the qrcode library
 import img from './img/template1.png';
 
-const GenerateCertificate = ({ name, course, issuer, endorser_name, begin_date, end_date }) => {
+const GenerateCertificate = ({ name, course, issuer, endorser_name, begin_date, end_date, transaction_id }) => {
     // Create a new jsPDF instance
     const doc = new jsPDF({
         orientation: 'landscape',
@@ -21,14 +21,31 @@ const GenerateCertificate = ({ name, course, issuer, endorser_name, begin_date, 
     doc.setFont('helvetica');
     doc.text(name, 145, 110, { align: 'center' });
 
+    if (begin_date !== '' || end_date !== '') {
+        doc.setFontSize(18);
+        doc.setFont('helvetica');
+        doc.text("Begin_Date: " + begin_date, 95, 195, { align: 'center' });
+
+        doc.setFontSize(18);
+        doc.setFont('helvetica');
+        doc.text("End_Date: " + end_date, 170, 195, { align: 'center' });
+
+
+    }
+
     // Add begin_date and end_date
-    doc.setFontSize(18);
-    doc.setFont('helvetica');
-    doc.text("Begin_Date: " + begin_date, 95, 195, { align: 'center' });
+    // doc.setFontSize(18);
+    // doc.setFont('helvetica');
+    // doc.text("Begin_Date: " + begin_date, 95, 195, { align: 'center' });
 
     doc.setFontSize(18);
     doc.setFont('helvetica');
-    doc.text("End_Date: " + end_date, 170, 195, { align: 'center' });
+    doc.text("Transaction_id: " + transaction_id, 95, 10, { align: 'center' });
+
+
+    // doc.setFontSize(18);
+    // doc.setFont('helvetica');
+    // doc.text("End_Date: " + end_date, 170, 195, { align: 'center' });
 
 
     const formatDate = (dateString) => {

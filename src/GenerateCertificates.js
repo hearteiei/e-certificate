@@ -3,7 +3,7 @@ import jsPDF from 'jspdf'
 import img from './img/template1.png'
 
 const GenerateCertificates = (certinfos) => {
-  certinfos.forEach(({ student_Name, course, issuer, Endorser_Name }) => {
+  certinfos.forEach(({ student_Name, course, issuer, Endorser_Name,Begin_Date,End_date}) => {
 
     // Create a new jsPDF instance
     const doc = new jsPDF({

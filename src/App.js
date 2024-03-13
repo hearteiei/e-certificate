@@ -8,6 +8,7 @@ import Createmany from './Createmany';
 import Newcourse from './Newcourse';
 import Template from './Template';
 import Importexcel from './Importexcel';
+import Course from './Course';
 function App() {
   return (
     <div>
@@ -20,6 +21,7 @@ function App() {
       <Route path="/newcourse" element ={<Newcourse/>} />
       <Route path="/template" element ={<Template/>} />
       <Route path="/importexcel" element ={<Importexcel/>} />
+      <Route path="/course" element ={<Course/>} />
      </Routes>
     </div>
   );

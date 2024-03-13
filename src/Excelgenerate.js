@@ -38,11 +38,33 @@ class Excelgenerate extends React.Component {
     // Combine default headers with checked headers
     const allHeaders = [...defaultHeaders, ...checkedHeaders];
 
+
+
     // Create a new worksheet
     const ws = XLSX.utils.aoa_to_sheet([allHeaders]);
 
+
+
     // Create a new workbook
     const wb = XLSX.utils.book_new();
+
+    const exampleData = ['John Doe', 'john.doe@example.com']; // Example data corresponding to default headers
+    checkedHeaders.forEach(header => {
+      if (header === 'Begin_Date' || header === 'End_date') {
+        exampleData.push(new Date().toLocaleDateString()); // Adding current date as example data for date columns
+      } 
+      else if(header === 'Endorser_Name'){
+        exampleData.push('kampol woradit')
+
+      }
+      else {
+        exampleData.push(''); // Placeholder for other columns
+      }
+    });
+    XLSX.utils.sheet_add_aoa(ws, [exampleData], { origin: -1 });
+
+    const exampleDataRow = ['Example data', '', 'This row contains example data please put the date to this form yyyy/mm/dd. and please delete this two row before import'];
+  XLSX.utils.sheet_add_aoa(ws, [exampleDataRow],{ origin: -1 });
 
     // Add worksheet to workbook
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
@@ -73,7 +95,7 @@ class Excelgenerate extends React.Component {
             Endorser_Name
           </label>
         </div>
-        <div className="form-check">
+        {/* <div className="form-check">
           <input
             className="form-check-input"
             type="checkbox"
@@ -83,7 +105,7 @@ class Excelgenerate extends React.Component {
           <label className="form-check-label" htmlFor="Location">
             Location
           </label>
-        </div>
+        </div> */}
         <div className="form-check">
           <input
             className="form-check-input"

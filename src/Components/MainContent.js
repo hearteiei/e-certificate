@@ -102,7 +102,7 @@ function MainContent() {
               </div>
               <div className="form-group">
                 <label>Create for Many people using Excel</label><br />
-                <button className="btn btn-success">Create for many</button>
+                <button className="btn btn-success">Create for a Course</button>
               </div>
             </div>
           </div>
