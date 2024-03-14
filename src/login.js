@@ -13,6 +13,40 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
+        const requestData = {
+            Mail: inputs.email,
+            password: inputs.password
+        };
+        console.log(requestData);
+    
+        fetch('http://localhost:8000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle successful response
+            localStorage.setItem('accessToken', data.access_token);
+            localStorage.setItem('User', JSON.stringify(data.user));
+            // const account = localStorage.getItem('User');
+            // console.log(account)
+            console.log('login successful:', data);
+            // console.log(data.user);
+
+            window.location.href = "/home";
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('login failed:', error);
+        });
     }
 
     return (
@@ -53,10 +87,10 @@ export default function Login() {
                                             <div className="form-group">
                                                 <input
                                                     type="text"
-                                                    name="username"
+                                                    name="email"
                                                     className="form-control form-control-user"
                                                     placeholder="Enter Email"
-                                                    value={inputs.username || ""}
+                                                    value={inputs.email || ""}
                                                     onChange={handleChange}
                                                 />
                                             </div>
@@ -82,11 +116,11 @@ export default function Login() {
                                             </button> */}
                                         </form>
                                         {/* <hr /> */}
-                                        <div className="text-center">
+                                        {/* <div className="text-center">
                                             <a className="small" href="forgot-password.html">Forgot Password?</a>
-                                        </div>
+                                        </div> */}
                                         <div className="text-center">
-                                            <a className="small" href="register.html">Create an Account!</a>
+                                            <a className="small" href="register">Create an Account!</a>
                                         </div>
                                     </div>
                                 </div>

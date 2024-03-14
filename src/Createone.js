@@ -4,6 +4,9 @@ import Topbar from './Components/Topbar';
 import './All.css';
 import GenerateCertificate from './GenerateCertificate';
 
+
+const data = localStorage.getItem('User');
+const account = JSON.parse(data);
 function Createone() {
 
   const formatDate = (dateString) => {
@@ -17,7 +20,6 @@ function Createone() {
     endorser_name: '',
     begin_date: '',
     end_date: '',
-    location: '',
     issue_date: ''
   });
 
@@ -26,15 +28,15 @@ function Createone() {
     const certinfo = {
       course: formData.course_name,
       name: formData.student_name,
-      issuer: "Heart",
+      issuer: account.firstname + " " + account.lastname,
+      mail: formData.email,
       endorser_name: formData.endorser_name,
       begin_date: formData.begin_date,
       end_date: formData.end_date,
       issue_date: issuerDate,
-      location: formData.location
     };
     console.log(certinfo); // You can do whatever you need with the certinfo object
-    
+
     const data = new URLSearchParams();
     data.append('channelid', 'mychannel');
     data.append('chaincodeid', 'basic');
@@ -42,11 +44,13 @@ function Createone() {
     // data.append('args', "asset1293231429");
     data.append('args', certinfo.name);
     data.append('args', certinfo.endorser_name);
+    data.append('args', certinfo.mail);
     data.append('args', certinfo.course);
     data.append('args', certinfo.issuer);
     data.append('args', certinfo.issue_date);
     data.append('args', certinfo.begin_date);
     data.append('args', certinfo.end_date);
+    data.append('args', "Success");
 
     // Make the API call using fetch
     fetch('http://localhost:8000/invoke', {
@@ -68,6 +72,36 @@ function Createone() {
         certinfo.transaction_id = data.transaction_id; // Assuming data is the JSON response
         console.log('Updated certinfo:', certinfo);
         GenerateCertificate(certinfo);
+        const requestData = {
+          studentName: certinfo.name,
+          course: certinfo.course,
+          issuer: certinfo.issuer,
+          endorserName: certinfo.endorser_name,
+          beginDate: certinfo.begin_date,
+          endDate: certinfo.end_date,
+          mail: certinfo.mail,
+          transaction:certinfo.transaction_id
+        };
+        console.log(requestData)
+
+
+        fetch('http://localhost:8000/generate-certificates', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData)
+      })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+
+
+
+
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -114,6 +148,10 @@ function Createone() {
                     <div className="form-group">
                       <label htmlFor="endorser_name">Endorser Name</label>
                       <input type="text" className="form-control" id="endorser_name" name="endorser_name" placeholder="Enter endorser name" onChange={handleInputChange} required />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="endorser_name">Email</label>
+                      <input type="text" className="form-control" id="endorser_name" name="email" placeholder="Enter endorser name" onChange={handleInputChange} required />
                     </div>
                     <div className="form-group">
                       <label htmlFor="begin_date">Begin date(optional)</label>

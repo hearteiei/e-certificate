@@ -65,7 +65,7 @@ function Sidebar() {
             </li>
 
             <li className="nav-item">
-                <a className="nav-link" href="Newcourse">
+                <a className="nav-link" href="course">
                     {/* <i className="fas fa-fw fa-chart-area"></i> */}
                     <span>Create for a Course</span>
                 </a>
