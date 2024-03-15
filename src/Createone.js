@@ -3,6 +3,7 @@ import Sidebar from './Components/Sidebar';
 import Topbar from './Components/Topbar';
 import './All.css';
 import GenerateCertificate from './GenerateCertificate';
+import { Table, Modal, Button, Form } from 'react-bootstrap';
 
 
 const data = localStorage.getItem('User');
@@ -27,10 +28,10 @@ function Createone() {
     event.preventDefault();
     const certinfo = {
       course: formData.course_name,
-      name: formData.student_name,
+      name: formData.student_fname + " " + formData.student_lname,
       issuer: account.firstname + " " + account.lastname,
       mail: formData.email,
-      endorser_name: formData.endorser_name,
+      endorser_name: formData.endorser_fname + " " + formData.endorser_lname,
       begin_date: formData.begin_date,
       end_date: formData.end_date,
       issue_date: issuerDate,
@@ -80,7 +81,7 @@ function Createone() {
           beginDate: certinfo.begin_date,
           endDate: certinfo.end_date,
           mail: certinfo.mail,
-          transaction:certinfo.transaction_id
+          transaction: certinfo.transaction_id
         };
         console.log(requestData)
 
@@ -88,15 +89,17 @@ function Createone() {
         fetch('http://localhost:8000/generate-certificates', {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(requestData)
-      })
+        })
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
+            showSuccessPopup();
             return response.json();
+
           })
 
 
@@ -116,6 +119,16 @@ function Createone() {
       [name]: value
     });
   };
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const showSuccessPopup = () => {
+    setShowSuccessModal(true);
+  }
+
+  const hideSuccessPopup = () => {
+    window.location.reload();
+    setShowSuccessModal(false);
+  }
+
 
   return (
     <div id="wrapper">
@@ -141,17 +154,29 @@ function Createone() {
                       <label htmlFor="course_name">Course Name</label>
                       <input type="text" className="form-control" id="course_name" name="course_name" placeholder="Enter course name" onChange={handleInputChange} required />
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="student_name">Student Name</label>
-                      <input type="text" className="form-control" id="student_name" name="student_name" placeholder="Enter student name" onChange={handleInputChange} required />
+                    <div className="form-row">
+                      <div className="form-group col-md-6">
+                        <label htmlFor="student_fname">Student First Name</label>
+                        <input type="text" className="form-control" id="student_fname" name="student_fname" placeholder="Enter student first name" onChange={handleInputChange} required />
+                      </div>
+                      <div className="form-group col-md-6">
+                        <label htmlFor="student_lname">Student Last Name</label>
+                        <input type="text" className="form-control" id="student_lname" name="student_lname" placeholder="Enter student last name" onChange={handleInputChange} required />
+                      </div>
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="endorser_name">Endorser Name</label>
-                      <input type="text" className="form-control" id="endorser_name" name="endorser_name" placeholder="Enter endorser name" onChange={handleInputChange} required />
+                    <div className="form-row">
+                      <div className="form-group col-md-6">
+                        <label htmlFor="endorser_fname">Endorser First Name</label>
+                        <input type="text" className="form-control" id="endorser_fname" name="endorser_fname" placeholder="Enter endorser first name" onChange={handleInputChange} required />
+                      </div>
+                      <div className="form-group col-md-6">
+                        <label htmlFor="endorser_lname">Endorser Last Name</label>
+                        <input type="text" className="form-control" id="endorser_lname" name="endorser_lname" placeholder="Enter endorser last name" onChange={handleInputChange} required />
+                      </div>
                     </div>
                     <div className="form-group">
                       <label htmlFor="endorser_name">Email</label>
-                      <input type="text" className="form-control" id="endorser_name" name="email" placeholder="Enter endorser name" onChange={handleInputChange} required />
+                      <input type="email" className="form-control" id="endorser_name" name="email" placeholder="Enter endorser name" onChange={handleInputChange} required />
                     </div>
                     <div className="form-group">
                       <label htmlFor="begin_date">Begin date(optional)</label>
@@ -174,6 +199,19 @@ function Createone() {
           </div>
         </div>
       </div>
+      <Modal show={showSuccessModal} onHide={hideSuccessPopup}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Course created successfully!
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={hideSuccessPopup}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

@@ -8,6 +8,7 @@ function Course() {
     const [showModal, setShowModal] = useState(false);
     const [newCourseName, setNewCourseName] = useState('');
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [courseCounts, setCourseCounts] = useState({ success: 0, pending: 0 });
 
     const data = localStorage.getItem('User');
     const account = JSON.parse(data);
@@ -31,6 +32,9 @@ function Course() {
                 // Sort data by issuerDate
                 newData.sort((a, b) => new Date(a.issuerDate) - new Date(b.issuerDate));
                 setCourses(newData);
+                const successCount = newData.filter(course => course.status === 'Success').length;
+                const pendingCount = newData.filter(course => course.status === 'Pending').length;
+                setCourseCounts({ success: successCount, pending: pendingCount });
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -108,7 +112,8 @@ function Course() {
     }
 
     const handleViewCourse = (courseName) => {
-        const url = `/view?courseName=${encodeURIComponent(courseName)}`;
+
+        const url = `/view?courseName=${encodeURIComponent(courseName)}&issuerDate=${encodeURIComponent(issuerDate)}`;
         window.location.href = url;
 
     }
@@ -125,6 +130,8 @@ function Course() {
     const hideSuccessPopup = () => {
         setShowSuccessModal(false);
     }
+    localStorage.setItem('SuccessC', courseCounts.success);
+    localStorage.setItem('PendingC', courseCounts.pending);
     return (
         <div id="wrapper">
             {/* Sidebar */}
@@ -161,7 +168,7 @@ function Course() {
                                                     <td>{course.status}</td>
                                                     <td>
                                                         {course.status === 'Success' ? (
-                                                            <Button variant="primary" onClick={() => handleViewCourse(course.course)}>View</Button>
+                                                            <Button variant="primary" onClick={() => handleViewCourse(course.course, course.issuerDate)}>View</Button>
                                                         ) : (
                                                             <Button variant="secondary" onClick={() => handleImportCourse(course.course)}>Import</Button>
                                                         )}
@@ -170,6 +177,9 @@ function Course() {
                                             ))}
                                         </tbody>
                                     </Table>
+                                    
+                                    {/* <p>Success: {courseCounts.success}</p>
+                                    <p>Pending: {courseCounts.pending}</p> */}
                                 </div>
                             </div>
                         </div>

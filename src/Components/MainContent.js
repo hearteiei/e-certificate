@@ -2,11 +2,17 @@ import React from 'react';
 import '../All.css';
 
 function MainContent() {
+  const s = localStorage.getItem('SuccessC');
+  const p = localStorage.getItem('PendingC');
+  const data = localStorage.getItem('User');
+    const account = JSON.parse(data);
+    // console.log(account);
+    const issuer = account.firstname + " " + account.lastname;
   return (
     <div className="container-fluid">
       {/* Page Heading */}
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Welcome Kunasin!!! </h1>
+        <h1 className="h3 mb-0 text-gray-800">Welcome {account.firstname}!!! </h1>
       </div>
 
       {/* Content Row */}
@@ -19,7 +25,7 @@ function MainContent() {
                 <div className="col mr-2">
                   <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
                     Certificate Created</div>
-                  <div className="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                  <div className="h5 mb-0 font-weight-bold text-gray-800">{p}</div>
                 </div>
               </div>
             </div>
@@ -49,7 +55,7 @@ function MainContent() {
                 <div className="col mr-2">
                   <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
                     Pending Created</div>
-                  <div className="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                  <div className="h5 mb-0 font-weight-bold text-gray-800">{s}</div>
                 </div>
               </div>
             </div>
