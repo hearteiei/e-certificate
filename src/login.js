@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 export default function Login() {
     const [inputs, setInputs] = useState({});
+    const [error, setError] = useState('');
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -45,6 +46,7 @@ export default function Login() {
         })
         .catch(error => {
             // Handle errors
+            setError('Login failed. Please check your credentials and try again.');
             console.error('login failed:', error);
         });
     }
@@ -83,6 +85,7 @@ export default function Login() {
                                         <div className="text-center">
                                             <h1 className="h4 text-gray-900 mb-4">Log in</h1>
                                         </div>
+                                        {error && <div className="alert alert-danger">{error}</div>}
                                         <form className="user" onSubmit={handleSubmit}>
                                             <div className="form-group">
                                                 <input
