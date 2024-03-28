@@ -87,7 +87,7 @@ function Createone() {
         console.log(requestData)
 
 
-        fetch(`${apiUrl}//generate-certificates`, {
+        fetch(`${apiUrl}/generate-certificates`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
