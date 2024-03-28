@@ -3,8 +3,9 @@ import * as XLSX from 'xlsx';
 import Button from '@mui/material/Button';
 import { Table, Modal, Form } from 'react-bootstrap';
 import GenerateCertificates from './GenerateCertificates'; // Import the GenerateCertificates component
-
+const apiUrl = process.env.REACT_APP_API_URL;
 class ExcelImporter extends React.Component {
+    
 
     state = {
         importedData: [],
@@ -84,7 +85,7 @@ class ExcelImporter extends React.Component {
 
         const sendData = async (data, requestData) => {
             try {
-                const response = await fetch('http://localhost:8000/invoke', {
+                const response = await fetch(`${apiUrl}/invoke`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -107,7 +108,7 @@ class ExcelImporter extends React.Component {
                 
 
 
-                fetch('http://localhost:8000/generate-certificates', {
+                fetch(`${apiUrl}/generate-certificates`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

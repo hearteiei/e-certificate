@@ -5,7 +5,7 @@ import './All.css';
 // import GenerateCertificate from './GenerateCertificate';
 import { Modal, Button } from 'react-bootstrap';
 
-
+const apiUrl = process.env.REACT_APP_API_URL;
 const data = localStorage.getItem('User');
 const account = JSON.parse(data);
 function Createone() {
@@ -54,7 +54,7 @@ function Createone() {
     data.append('args', "Success");
 
     // Make the API call using fetch
-    fetch('http://localhost:8000/invoke', {
+    fetch(`${apiUrl}/invoke`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -87,7 +87,7 @@ function Createone() {
         console.log(requestData)
 
 
-        fetch('http://localhost:8000/generate-certificates', {
+        fetch(`${apiUrl}//generate-certificates`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

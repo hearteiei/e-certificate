@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import img from './img/cmu.png';
 
 function Register() {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [inputs, setInputs] = useState({});
 
     const handleChange = (event) => {
@@ -21,7 +22,7 @@ function Register() {
         };
         console.log(requestData);
     
-        fetch('http://localhost:8000/register', {
+        fetch(`${apiUrl}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

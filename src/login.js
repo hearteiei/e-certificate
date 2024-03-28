@@ -10,6 +10,7 @@ export default function Login() {
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }))
     }
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,7 +21,7 @@ export default function Login() {
         };
         console.log(requestData);
     
-        fetch('http://localhost:8000/login', {
+        fetch(`${apiUrl}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

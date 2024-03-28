@@ -10,7 +10,7 @@ function OTP() {
         setInputs(values => ({ ...values, [name]: value }));
     };
     const email = localStorage.getItem('Email');
-
+    const apiUrl = process.env.REACT_APP_API_URL;
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
@@ -20,7 +20,7 @@ function OTP() {
         };
         console.log(requestData);
     
-        fetch('http://localhost:8000/checkotp', {
+        fetch(`${apiUrl}/checkotp`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

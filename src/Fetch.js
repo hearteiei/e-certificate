@@ -25,10 +25,11 @@ function Fetch() {
       endDate,
       mail
     };
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/gen', {
+        const response = await fetch(`${apiUrl}/gen`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

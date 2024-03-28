@@ -3,7 +3,9 @@ import Sidebar from './Components/Sidebar';
 import { Table, Modal, Button, Form } from 'react-bootstrap';
 import Topbar from './Components/Topbar';
 
+
 function Course() {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [courses, setCourses] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newCourseName, setNewCourseName] = useState('');
@@ -20,7 +22,7 @@ function Course() {
             try {
                 // Encode the issuer name to ensure URL safety
                 const encodedIssuer = encodeURIComponent(issuer);
-                const url = `http://localhost:8000/query?channelid=mychannel&chaincodeid=basic&function=GetDiplomasInfoByIssuer&args=${encodedIssuer}`;
+                const url = `${apiUrl}/query?channelid=mychannel&chaincodeid=basic&function=GetDiplomasInfoByIssuer&args=${encodedIssuer}`;
 
                 // Fetch data from your API
                 const response = await fetch(url);
@@ -84,7 +86,7 @@ function Course() {
         data.append('args', "");
         data.append('args', "Pending");
 
-        fetch('http://localhost:8000/invoke', {
+        fetch(`${apiUrl}/invoke`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

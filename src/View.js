@@ -7,7 +7,7 @@ function View() {
 
   const data = localStorage.getItem('User');
   const account = JSON.parse(data);
-  
+  const apiUrl = process.env.REACT_APP_API_URL;
   // console.log(account);
   const issuers = account.firstname + " " + account.lastname;
 
@@ -23,7 +23,7 @@ function View() {
         const encodecourse = encodeURIComponent(courseName);
 
         // http://localhost:8000/query?channelid=mychannel&chaincodeid=basic&function=Getstudent&args=${encodecourse}&args=${encodedIssuer}&args=${encodedate}
-        const url = `http://localhost:8000/query?channelid=mychannel&chaincodeid=basic&function=Getstudent&args=${encodecourse}&args=${encodedIssuer}&args=${encodedate}`;
+        const url = `${apiUrl}/query?channelid=mychannel&chaincodeid=basic&function=Getstudent&args=${encodecourse}&args=${encodedIssuer}&args=${encodedate}`;
 
         // Fetch data from your API
         const response = await fetch(url);
@@ -67,7 +67,7 @@ function View() {
         Transaction: "",
         issuerDate:issuerDate
     };
-    const response = await fetch('http://localhost:8000/dow', {
+    const response = await fetch(`${apiUrl}/dow`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
