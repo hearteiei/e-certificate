@@ -155,7 +155,8 @@ class ExcelImporter extends React.Component {
                 beginDate: data.begin_date,
                 endDate: data.end_date,
                 mail: mail,
-                transaction:''
+                transaction:'',
+                issuerDate:issuerDate
             };
 
 

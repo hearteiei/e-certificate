@@ -13,7 +13,6 @@ import Register from './Register';
 import Otp from './Otp';
 import Export from './Export';
 import View from './View';
-import Check from './Check';
 import Fetch from './Fetch';
 function App() {
   const token = localStorage.getItem('accessToken');
@@ -44,7 +43,6 @@ function App() {
           <Route path="/course" element={<Course />} />
           <Route path="/export" element={<Export />} />
           <Route path="/view" element={<View />} />
-          <Route path="/check" element={<Check />} />
         </>
       )}
     </Routes>

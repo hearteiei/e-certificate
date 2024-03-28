@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-
+import img from './img/cmu.png';
 export default function Login() {
     const [inputs, setInputs] = useState({});
     const [error, setError] = useState('');
@@ -79,6 +79,7 @@ export default function Login() {
                     <div className="card o-hidden border-0 shadow-lg my-5">
                         <div className="card-body p-0">
                             <div className="row">
+                            {/* <img className="col-lg-5 d-none d-lg-block " src={img} alt="Register img" /> */}
                                 <div className="col-lg-6 d-none d-lg-block"></div>
                                 <div className="col-lg-6">
                                     <div className="p-5">

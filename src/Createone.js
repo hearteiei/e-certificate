@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Sidebar from './Components/Sidebar';
 import Topbar from './Components/Topbar';
 import './All.css';
-import GenerateCertificate from './GenerateCertificate';
-import { Table, Modal, Button, Form } from 'react-bootstrap';
+// import GenerateCertificate from './GenerateCertificate';
+import { Modal, Button } from 'react-bootstrap';
 
 
 const data = localStorage.getItem('User');
@@ -72,7 +72,7 @@ function Createone() {
         // Handle API response if needed
         certinfo.transaction_id = data.transaction_id; // Assuming data is the JSON response
         console.log('Updated certinfo:', certinfo);
-        GenerateCertificate(certinfo);
+        // GenerateCertificate(certinfo);
         const requestData = {
           studentName: certinfo.name,
           course: certinfo.course,
@@ -81,7 +81,8 @@ function Createone() {
           beginDate: certinfo.begin_date,
           endDate: certinfo.end_date,
           mail: certinfo.mail,
-          transaction: certinfo.transaction_id
+          transaction: certinfo.transaction_id,
+          IssuerDate:issuerDate
         };
         console.log(requestData)
 
