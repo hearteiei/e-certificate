@@ -70,6 +70,7 @@ function Register() {
                                                 placeholder="First Name"
                                                 name="FirstName"
                                                 onChange={handleChange}
+                                                required
                                             />
                                         </div>
                                         <div className="col-sm-6">
@@ -80,6 +81,7 @@ function Register() {
                                                 placeholder="Last Name"
                                                 name="LastName"
                                                 onChange={handleChange}
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -91,6 +93,7 @@ function Register() {
                                             placeholder="Email Address"
                                             name="Mail"
                                             onChange={handleChange}
+                                            required
                                         />
                                     </div>
                                     <div className="form-group row">
@@ -102,16 +105,7 @@ function Register() {
                                                 placeholder="Password"
                                                 name="Password"
                                                 onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <input
-                                                type="password"
-                                                className="form-control form-control-user"
-                                                id="exampleRepeatPassword"
-                                                placeholder="Repeat Password"
-                                                name="repeatPassword"
-                                                onChange={handleChange}
+                                                required
                                             />
                                         </div>
                                     </div>
