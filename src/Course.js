@@ -20,18 +20,18 @@ function Course() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Encode the issuer name to ensure URL safety
+               
                 const encodedIssuer = encodeURIComponent(issuer);
                 const url = `${apiUrl}/query?channelid=mychannel&chaincodeid=basic&function=GetDiplomasInfoByIssuer&args=${encodedIssuer}`;
 
-                // Fetch data from your API
+           
                 const response = await fetch(url);
                 const text = await response.text();
-                // Remove the leading "Response: " text
+    
                 const data = JSON.parse(text.replace('Response: ', ''));
-                // Add a unique identifier to each row of data
+
                 const newData = data.map((row, index) => ({ ...row, id: index }));
-                // Sort data by issuerDate
+     
                 newData.sort((a, b) => new Date(a.issuerDate) - new Date(b.issuerDate));
                 setCourses(newData);
                 const successCount = newData.filter(course => course.status === 'Success').length;
@@ -42,13 +42,13 @@ function Course() {
             }
         };
 
-        // Call fetchData initially
+        
         fetchData();
 
-        // Call fetchData every 1 second
+  
         const interval = setInterval(fetchData, 1000);
 
-        // Clean up interval when component unmounts
+        
         return () => clearInterval(interval);
     }, [issuer]);
     const handleCreateCourse = () => {
@@ -101,10 +101,10 @@ function Course() {
             })
             .then(data => {
                 console.log('New course name:', newCourseName);
-                setShowModal(false); // Close the modal
-                showSuccessPopup(); // Show the success pop-up
+                setShowModal(false); 
+                showSuccessPopup(); 
                 setTimeout(() => {
-                    window.location.reload(); // Reload the page after 1 second
+                    window.location.reload(); 
                 }, 1000);
             })
             .catch(error => {
@@ -143,7 +143,7 @@ function Course() {
                 <div id="content">
                     {/* Topbar */}
                     <Topbar />
-                    {/* Your other content goes here */}
+                    {}
                     <div className="container-fluid">
                         <div className="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 className="h3 mb-0 text-gray-800">Your Course</h1>
@@ -180,15 +180,14 @@ function Course() {
                                         </tbody>
                                     </Table>
                                     
-                                    {/* <p>Success: {courseCounts.success}</p>
-                                    <p>Pending: {courseCounts.pending}</p> */}
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* Modal for creating new course */}
+            {}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create New Course</Modal.Title>

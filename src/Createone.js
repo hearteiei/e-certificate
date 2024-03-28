@@ -36,7 +36,7 @@ function Createone() {
       end_date: formData.end_date,
       issue_date: issuerDate,
     };
-    console.log(certinfo); // You can do whatever you need with the certinfo object
+    console.log(certinfo); 
 
     const data = new URLSearchParams();
     data.append('channelid', 'mychannel');
@@ -53,7 +53,7 @@ function Createone() {
     data.append('args', certinfo.end_date);
     data.append('args', "Success");
 
-    // Make the API call using fetch
+   
     fetch(`${apiUrl}/invoke`, {
       method: 'POST',
       headers: {
@@ -69,8 +69,8 @@ function Createone() {
       })
       .then(data => {
         console.log('API response:', data);
-        // Handle API response if needed
-        certinfo.transaction_id = data.transaction_id; // Assuming data is the JSON response
+        
+        certinfo.transaction_id = data.transaction_id; 
         console.log('Updated certinfo:', certinfo);
         // GenerateCertificate(certinfo);
         const requestData = {
@@ -109,7 +109,7 @@ function Createone() {
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
-        // Handle errors if needed
+        
       });
   };
 
@@ -140,7 +140,7 @@ function Createone() {
         <div id="content">
           {/* Topbar */}
           <Topbar />
-          {/* Your other content goes here */}
+          {}
           <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
               <h1 className="h3 mb-0 text-gray-800">Create For One</h1>

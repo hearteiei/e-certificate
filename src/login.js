@@ -35,7 +35,7 @@ export default function Login() {
             return response.json();
         })
         .then(data => {
-            // Handle successful response
+            
             localStorage.setItem('accessToken', data.access_token);
             localStorage.setItem('User', JSON.stringify(data.user));
             // const account = localStorage.getItem('User');
@@ -46,7 +46,7 @@ export default function Login() {
             window.location.href = "/home";
         })
         .catch(error => {
-            // Handle errors
+          
             setError('Login failed. Please check your credentials and try again.');
             console.error('login failed:', error);
         });

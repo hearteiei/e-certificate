@@ -36,14 +36,14 @@ function Register() {
             return response.json();
         })
         .then(data => {
-            // Handle successful response
+          
             console.log('Registration successful:', data);
             localStorage.setItem('Email', inputs.Mail);
             localStorage.setItem('register', "Success");
             window.location.href = "/otp";
         })
         .catch(error => {
-            // Handle errors
+            
             console.error('Registration failed:', error);
         });
     };
@@ -51,7 +51,7 @@ function Register() {
         <div className="container">
             <div className="card o-hidden border-0 shadow-lg my-5">
                 <div className="card-body p-0">
-                    {/* Nested Row within Card Body */}
+                    {}
                     <div className="row">
                         <img className="col-lg-5 d-none d-lg-block " src={img} alt="Register img" />
                         {/* <div className="col-lg-5 d-none d-lg-block bg-register-image"></div> */}

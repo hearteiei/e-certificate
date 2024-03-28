@@ -34,12 +34,12 @@ function OTP() {
             return response.json();
         })
         .then(data => {
-            // Handle successful response
+           
             console.log('CheckOtp successful:', data);
             window.location.href = "/login";
         })
         .catch(error => {
-            // Handle errors
+           
             console.error('Checkotp failed:', error);
         });
     };
@@ -48,7 +48,7 @@ function OTP() {
         <div className="container">
             <div className="card o-hidden border-0 shadow-lg my-5">
                 <div className="card-body p-0">
-                    {/* Nested Row within Card Body */}
+                    {}
                     <div className="row">
                         <img className="col-lg-5 d-none d-lg-block " src={img} alt="Register img" />
                         <div className="col-lg-7">

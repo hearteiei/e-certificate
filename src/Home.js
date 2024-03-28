@@ -13,7 +13,7 @@ function Home() {
                 <div id="content">
                     {/* Topbar */}
                     <Topbar />
-                    {/* Your other content goes here */}
+                    {}
                     <MainContent/>
                 </div>
             </div>

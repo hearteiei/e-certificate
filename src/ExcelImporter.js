@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import Button from '@mui/material/Button';
 import { Table, Modal, Form } from 'react-bootstrap';
-import GenerateCertificates from './GenerateCertificates'; // Import the GenerateCertificates component
+import GenerateCertificates from './GenerateCertificates'; 
 const apiUrl = process.env.REACT_APP_API_URL;
 class ExcelImporter extends React.Component {
     
@@ -10,12 +10,12 @@ class ExcelImporter extends React.Component {
     state = {
         importedData: [],
         showSuccessModal: false,
-        loading: false// State to store imported data
+        loading: false
     };
 
 
     componentDidMount() {
-        // Retrieve data from localStorage
+        
         const storedCertData = localStorage.getItem('certData');
         if (storedCertData) {
             const certinfo = JSON.parse(storedCertData);
@@ -41,20 +41,20 @@ class ExcelImporter extends React.Component {
             const data = new Uint8Array(e.target.result);
             const workbook = XLSX.read(data, { type: 'array' });
 
-            // Assuming there's only one sheet
+           
             const sheetName = workbook.SheetNames[0];
             const sheet = workbook.Sheets[sheetName];
 
 
             let jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-            // Extract headers from first row
+          
             const headers = jsonData[0];
 
-            // Filter out header row
+           
             jsonData = jsonData.slice(1);
 
-            // Combine first and last name to create student name
+           
             // jsonData = jsonData.map(row => {
             //     const student_fname = row[headers.indexOf('student_fname')];
             //     const student_lname = row[headers.indexOf('student_lname')];
@@ -63,14 +63,14 @@ class ExcelImporter extends React.Component {
             // });
 
 
-            // Add default course value to each object
+            
             jsonData = jsonData.map(item => ({ ...item, course: certinfo.course }));
             jsonData = jsonData.map(item => ({ ...item, issuer: certinfo.issuer }));
             jsonData = jsonData.map(item => ({ ...item, begin_date: certinfo.begin_date }));
             jsonData = jsonData.map(item => ({ ...item, end_date: certinfo.end_date }));
             jsonData = jsonData.map(item => ({ ...item, endorser_name: certinfo.endorser_name }));
 
-            // Update state with imported data
+            
             this.setState({ importedData: jsonData });
         };
 
@@ -128,10 +128,10 @@ class ExcelImporter extends React.Component {
 
 
                 // this.setState({ showSuccessModal: true });
-                // Handle response data if needed
+               
             } catch (error) {
                 console.error('Error:', error);
-                // Handle errors
+               
             }
         };
 
@@ -179,15 +179,15 @@ class ExcelImporter extends React.Component {
             dataput.append('args', data.end_date);
             dataput.append('args', "Success");
             console.log(dataput);
-            await sendData(dataput, req); // Wait for sendData to complete
+            await sendData(dataput, req); 
         }
 
-        // GenerateCertificates(importedData); // Call GenerateCertificates with imported data
+        // GenerateCertificates(importedData); 
     };
     hideSuccessModal = () => {
         this.setState({ showSuccessModal: false });
         window.location.href = "/course";
-        // Hide success modal
+        
     };
 
     render() {

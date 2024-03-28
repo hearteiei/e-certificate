@@ -14,7 +14,7 @@ function View() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Encode the issuer name to ensure URL safety
+        
         const queryParams = new URLSearchParams(window.location.search);
         const courseName = queryParams.get('courseName');
         const issuerDate = queryParams.get('issuerDate');
@@ -25,14 +25,14 @@ function View() {
         // http://localhost:8000/query?channelid=mychannel&chaincodeid=basic&function=Getstudent&args=${encodecourse}&args=${encodedIssuer}&args=${encodedate}
         const url = `${apiUrl}/query?channelid=mychannel&chaincodeid=basic&function=Getstudent&args=${encodecourse}&args=${encodedIssuer}&args=${encodedate}`;
 
-        // Fetch data from your API
+        
         const response = await fetch(url);
         const text = await response.text();
-        // Remove the leading "Response: " text
+       
         const data = JSON.parse(text.replace('Response: ', ''));
-        // Add a unique identifier to each row of data
+       
         const newData = data.map((row, index) => ({ ...row, id: index }));
-        // Sort data by issuerDate
+       
         newData.sort((a, b) => new Date(a.issuerDate) - new Date(b.issuerDate));
         setstudents(newData);
         // const successCount = newData.filter(course => course.status === 'Success').length;
@@ -43,13 +43,13 @@ function View() {
       }
     };
 
-    // Call fetchData initially
+    
     fetchData();
 
-    // Call fetchData every 1 second
+    
     const interval = setInterval(fetchData, 1000);
 
-    // Clean up interval when component unmounts
+    
     return () => clearInterval(interval);
   }, [issuers]);
   const handleDownload = async (courseName, issuerDate,name,en_name,begin,end,mail) => {
@@ -84,16 +84,16 @@ function View() {
       // const encodedate = encodeURIComponent(issuerDate);
       // const encodecourse = encodeURIComponent(courseName);
 
-      // Call your API endpoint to download the certificate PDF
+      
       // const response = await fetch(`http://localhost:8000/downloadCertificate?courseName=${encodecourse}&issuerDate=${encodedate}&issuer=${encodedIssuer}`);
 
-      // Check if the response is successful
+      
       if (response.ok) {
-        // Convert the response to blob
+        
         const blob = await response.blob();
-        // Create a temporary anchor element
+       
         const url = window.URL.createObjectURL(blob);
-        // Create a link and simulate a click to trigger download
+        
         const a = document.createElement('a');
         a.href = url;
         a.download = 'certificate.pdf';
@@ -124,7 +124,7 @@ function View() {
         <div id="content">
           {/* Topbar */}
           <Topbar />
-          {/* Your other content goes here */}
+          {}
           <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
               <h1 className="h3 mb-0 text-gray-800">Your Course</h1>

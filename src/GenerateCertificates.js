@@ -5,24 +5,23 @@ import img from './img/template1.png'
 const GenerateCertificates = (certinfos) => {
   certinfos.forEach(({ student_Name, course, issuer, Endorser_Name,Begin_Date,End_date}) => {
 
-    // Create a new jsPDF instance
+   
     const doc = new jsPDF({
       orientation: 'landscape',
       unit: 'mm',
       format: [200, 300]
     });
     
-    // Add background image
+    
     const imageWidth = doc.internal.pageSize.getWidth();
     const imageHeight = doc.internal.pageSize.getHeight();
     doc.addImage(img, 'PNG', 0, 0, imageWidth, imageHeight, '', 'FAST');
 
-    // Add recipient name
+    
     doc.setFontSize(36);
     doc.setFont('helvetica');
     doc.text(student_Name, 145, 110, { align: 'center' }); 
 
-    // Add course name
     doc.setFontSize(20);
     doc.text(course, 145, 150, { align: 'center' }); 
 

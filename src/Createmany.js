@@ -48,10 +48,10 @@ function Createmany() {
 
     localStorage.setItem('certData', JSON.stringify(cert));
 
-    // Redirect to export page
+    
     window.location.href = '/export';
     console.log(cert);
-    // Here you can add further logic to handle the certificate creation
+   
   };
 
   return (
@@ -63,7 +63,7 @@ function Createmany() {
         <div id="content">
           {/* Topbar */}
           <Topbar />
-          {/* Your other content goes here */}
+          {}
           <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
               <h1 className="h3 mb-0 text-gray-800">Import</h1>
@@ -86,7 +86,7 @@ function Createmany() {
                       <label htmlFor="end_date">End date(optional)</label>
                       <input type="date" className="form-control" id="end_date" name="end_date" placeholder="Enter end date" onChange={handleInputChange} />
                     </div>
-                    {/* You can add more form inputs here */}
+                    {}
                     <button type="submit" className="btn btn-success">Next </button>
                   </form>
                 </div>

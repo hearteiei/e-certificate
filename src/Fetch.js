@@ -37,7 +37,7 @@ function Fetch() {
           body: JSON.stringify(postData)
         });
 
-        // Check if response is successful
+       
         if (!response.ok) {
             throw new Error('Failed to fetch PDF');
           }

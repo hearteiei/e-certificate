@@ -10,32 +10,31 @@ class Excelgenerate extends React.Component {
     const { certData } = this.props;
     
 
-    // Default headers
+    
     const defaultHeaders = ['student_fName','student_LName', 'Email'];
 
     
 
 
 
-    // Create a new worksheet
+
     const ws = XLSX.utils.aoa_to_sheet([defaultHeaders]);
 
 
 
-    // Create a new workbook
     const wb = XLSX.utils.book_new();
 
   
 
-    // Add worksheet to workbook
+
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-    // Generate Excel file and trigger download
+   
     XLSX.writeFile(wb, 'header.xlsx');
 
     localStorage.setItem('certData', JSON.stringify(certData));
 
-    // Redirect to importexcel page
+
     window.location.href = 'importexcel';
   };
 

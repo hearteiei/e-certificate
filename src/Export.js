@@ -7,11 +7,11 @@ function Export() {
     const [certData, setCertData] = useState(null);
 
   useEffect(() => {
-    // Retrieve cert data from localStorage
+    
     const storedCertData = localStorage.getItem('certData');
     if (storedCertData) {
       setCertData(JSON.parse(storedCertData));
-      // Optionally, clear the certData from localStorage after retrieving
+      
     //   localStorage.removeItem('certData');
     }
     
@@ -26,7 +26,7 @@ function Export() {
       <div id="content">
         {/* Topbar */}
         <Topbar />
-        {/* Your other content goes here */}
+        {}
         <div className="container-fluid">
           <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="h3 mb-0 text-gray-800">Import</h1>
